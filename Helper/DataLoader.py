@@ -53,6 +53,7 @@ def clean_data(dataset):
             dataset.loc[dataset.year_built == 0, 'year_built'] = median_value
         elif column == 'min_to_subway':
             dataset.loc[dataset.min_to_subway > 100, 'min_to_subway'] = median_value
+    return dataset
 
 def normalized_dataset(dataset):
     '''
