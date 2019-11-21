@@ -1,6 +1,6 @@
 # DataScience_Project
 
-###Team Members
+### Team Members
 - Jin Chen
 - Xiaohong Zhu
 - Lin Hua
