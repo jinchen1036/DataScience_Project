@@ -7,9 +7,19 @@ class Parameters:
         self.dtree_parameter = {
             'max_depth': np.arange(5, 55, 5),
             'min_samples_split': np.arange(10, 200, 10),
-            'max_features': np.arange(4, 15, 2),
+            'max_features': np.arange(4, 17, 2),
+        }
+        self.dtree_less_parameter = {
+            'max_depth': np.arange(5, 55, 5),
+            'min_samples_split': np.arange(10, 200, 10),
+            'max_features': np.arange(4, 10, 2),
         }
         self.knn_parameter ={
             'n_neighbors': np.arange(2, 22, 2)
         }
+        self.gradient_parameter = {'n_estimators': np.arange(100, 500, 50),'min_samples_split': np.arange(10, 200, 10),
+          'learning_rate': [0.001, 0.0001, 0.00001]}
 
+        self.ada_parameter = {'n_estimators': np.arange(100, 500, 50),'learning_rate': [0.001, 0.0001, 0.00001]}
+
+        self.linreg_parameter = {'fit_intercept': [True, False] }
