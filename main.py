@@ -20,7 +20,11 @@ combine_df = clean_data(combine_df)
 combine_df = normalized_dataset(combine_df)
 
 # Train Models - All Selected Features
-
+modelProcessor.train_model(classifier=LinearRegression(),parameters=parameter.linreg_parameter,
+                           feature_columns= parameter.feature_columns,
+                           train_df= combine_df.iloc[:12000], test_df=combine_df.iloc[12000:14000],
+                           grid=True,train_target='rent',cv_split = 4, trainWithTest1=False,
+                           test2_df=combine_df.iloc[14000:])
 #Decision Tree
 modelProcessor.train_model(classifier=DecisionTreeClassifier(),parameters=parameter.dtree_parameter,
                            feature_columns= parameter.feature_columns,
@@ -41,7 +45,7 @@ modelProcessor.train_model(classifier=LinearRegression(),parameters=parameter.li
                            grid=False,train_target='rent',cv_split = 4)
 
 #Gradient Boosting
-modelProcessor.train_model(classifier=GradientBoostingRegressor(loss="lad"),parameters=parameter.gradient_parameter,
+modelProcessor.train_model(classifier=GradientBoostingRegressor(loss="ls"),parameters=parameter.gradient_parameter,
                            feature_columns= parameter.feature_columns,
                            train_df= combine_df.iloc[:14000], test_df=combine_df.iloc[14000:],
                            grid=False,train_target='rent',cv_split = 4)
@@ -79,7 +83,7 @@ modelProcessor.train_model(classifier=LinearRegression(),parameters=parameter.li
                            grid=False,train_target='rent',cv_split = 4)
 
 #Gradient Boosting
-modelProcessor.train_model(classifier=GradientBoostingRegressor(loss="lad"),parameters=parameter.gradient_parameter,
+modelProcessor.train_model(classifier=GradientBoostingRegressor(loss="ls"),parameters=parameter.gradient_parameter,
                            feature_columns= features,
                            train_df= combine_df.iloc[:14000], test_df=combine_df.iloc[14000:],
                            grid=False,train_target='rent',cv_split = 4)
