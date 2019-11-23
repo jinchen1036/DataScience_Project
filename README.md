@@ -3,7 +3,7 @@
 ### Team Members
 - Jin Chen
 - Xiaohong Zhu
-- Lin Hua
+- Hua Lin 
 - Xin Zhao
 
 ### Project Goal
