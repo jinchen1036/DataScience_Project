@@ -1,12 +1,10 @@
 from Helper.DataLoader import *
-from Helper.DataVisualization import statistic_analysis
-from Helper.SearchCVModels import CV_Model
 from Helper.StaticParameters import Parameters
-from ModelProcessor import ModelProcessor
+from Helper.ModelProcessor import ModelProcessor
 
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeRegressor
 # from sklearn.linear_model import Ridge, Lasso
 from sklearn.ensemble import GradientBoostingRegressor, AdaBoostRegressor
 
@@ -26,7 +24,7 @@ modelProcessor.train_model(classifier=LinearRegression(),parameters=parameter.li
                            grid=True,train_target='rent',cv_split = 4, trainWithTest1=False,
                            test2_df=combine_df.iloc[14000:])
 #Decision Tree
-modelProcessor.train_model(classifier=DecisionTreeClassifier(),parameters=parameter.dtree_parameter,
+modelProcessor.train_model(classifier=DecisionTreeRegressor(),parameters=parameter.dtree_parameter,
                            feature_columns= parameter.feature_columns,
                            train_df= combine_df.iloc[:14000], test_df=combine_df.iloc[14000:],
                            grid=False,train_target='rent',cv_split = 4)
@@ -64,7 +62,7 @@ features = ['bedrooms', 'bathrooms', 'size_sqft', 'addr_zip', 'floor_count', 'mi
                         'is_furnished', 'allows_pets', 'no_fee','floornumber']
 
 #Decision Tree
-modelProcessor.train_model(classifier=DecisionTreeClassifier(),parameters=parameter.dtree_less_parameter,
+modelProcessor.train_model(classifier=DecisionTreeRegressor(),parameters=parameter.dtree_less_parameter,
                            feature_columns= features,
                            train_df= combine_df.iloc[:14000], test_df=combine_df.iloc[14000:],
                            grid=False,train_target='rent',cv_split = 4)
