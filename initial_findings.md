@@ -1,5 +1,4 @@
 ## Strategies 
-#### Feauture Extraction Technique
 To find the best model with best performance, our approach was as followed:
 1. Conduct EDA on the three given data sets (training set, test1 set, test2 set) by visualizing all the numerical fields that are not boolean (binary) values using histograms. We picked out the obvious outliers and see if they are truly outliers (i.e. if the value makes sense) by getting the min and max of the columns. We also identified the fields that contain null values.
 2. Clean the data based on what we found during the EDA:
@@ -65,6 +64,7 @@ Analysis Random Forest performance compared with using more features, less featu
 |---------------|--------------|--------------|--------------|--------------|--------------|--------------|
 |               | test1 loss   | test2 loss   | test1 loss   | test2 loss   | test1 loss   | test2 loss   |
 | Random Forest | 1737228.7359 | 6569618.5177 | 1750304.2386 | 6537426.7855 | 1787680.1939 | 6790996.1342 |
+
 Analysis
 - Surprise that the normalization have not improve the model performance.
 - Same model don't have same results for each training, could be the model focus on different features or the threshold value are changing. 
