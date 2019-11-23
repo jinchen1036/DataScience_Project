@@ -13,7 +13,10 @@
         - Median is better than mean value, since outliers can have big influence in the mean value
     - Normalize the clean dataset, so each field are arrange from 0 to 1
         - Make the influence of each field equally distribute to the model.
-        
+- Statistic Analysis identify which fields to be used for train the model
+    - Using Ordinary Least Squares to see the relation of each field with the target (rent)
+    - Use the fields that with p-value equal to 0 
+    
 #### Model Selection and Training
 - Find the best hyperparameters of each model
     - GridSearchCV -> decide the final hyperparameters
