@@ -40,14 +40,16 @@ class ModelProcessor:
         print("Train Loss: %.4f" % loss)
 
         self.test_pred = self.classifier.predict(test_df[feature_columns])
-        self.test2_pred = "Not Train"
         if trainWithTest1:
             loss = mean_squared_error(self.test_pred, self.get_fake_rent(train_df[train_target], test_df.shape[0]))
+            print("Test Set Loss: %.4f" % loss)
+            return self.train_pred, self.test_pred
         else:
             loss = mean_squared_error(self.test_pred, test_df[train_target])
+            print("Test Set 1 Loss: %.4f" % loss)
             self.test2_pred = self.classifier.predict(test2_df[feature_columns])
             t2_loss = mean_squared_error(self.test2_pred, self.get_fake_rent(train_df[train_target], test2_df.shape[0]))
             print("Test Set 2 - Loss: %.4f" % t2_loss)
-        print("Test Set 1 Loss: %.4f" % loss)
+            return self.train_pred, self.test_pred, self.test2_pred
 
-        return self.train_pred, self.test_pred, self.test2_pred
+
