@@ -6,10 +6,10 @@ desired_width=320
 pd.set_option('display.width', desired_width)
 pd.set_option('display.max_columns',10)
 
-def load_dataset(numeric=True, extract_dataset=False):
+def load_dataset(numeric=True, extra_dataset=False):
     '''
     :param numeric: if True will return only numeric columns
-    :param extract_dataset: if True then will return extract information (not implement yet)
+    :param extra_dataset: if True then will return extract information (not implement yet)
     :return:
     '''
     train_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_train.csv', index_col=0)
@@ -21,8 +21,10 @@ def load_dataset(numeric=True, extract_dataset=False):
     combine_df = pd.concat([train_df,test_set1_df,test_set2_df])
     if numeric:
         combine_df = combine_df.select_dtypes(include=[np.number])
-    if not extract_dataset:
+    if not extra_dataset:
         combine_df = combine_df.drop(['bin', 'bbl', 'building_id'], axis=1)
+    else:
+        external_df= pd.read_csv('https://data.cityofnewyork.us/resource/myei-c3fa.csv')
     return combine_df, train_df_index, test_set1_index, test_set2_index
 
 

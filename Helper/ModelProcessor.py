@@ -1,5 +1,5 @@
 from Helper.DataLoader import *
-from Helper.SearchCVModels import CV_Model
+from SearchModel_Part1.SearchCVModels import CV_Model
 from sklearn.metrics import mean_squared_error
 
 

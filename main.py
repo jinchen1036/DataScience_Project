@@ -1,5 +1,5 @@
 from Helper.DataLoader import *
-from Helper.StaticParameters import Parameters
+from SearchModel_Part1.StaticParameters import Parameters
 from Helper.ModelProcessor import ModelProcessor
 
 from sklearn.neighbors import KNeighborsRegressor
