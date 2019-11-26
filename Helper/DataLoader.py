@@ -9,23 +9,28 @@ pd.set_option('display.max_columns',10)
 def load_dataset(numeric=True, extra_dataset=False):
     '''
     :param numeric: if True will return only numeric columns
-    :param extra_dataset: if True then will return extract information (not implement yet)
+    :param extra_dataset: if True then will return extract income information
     :return:
     '''
     train_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_train.csv', index_col=0)
     test_set1_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test1.csv', index_col=0)
     test_set2_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test2.csv', index_col=0)
+    test_set3_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test3.csv', index_col=0)
+
     train_df_index = train_df.index
     test_set1_index = test_set1_df.index
     test_set2_index = test_set2_df.index
-    combine_df = pd.concat([train_df,test_set1_df,test_set2_df])
+    test_set3_index = test_set3_df.index
+    combine_df = pd.concat([train_df,test_set1_df,test_set2_df,test_set3_df])
+
     if numeric:
         combine_df = combine_df.select_dtypes(include=[np.number])
     if not extra_dataset:
-        combine_df = combine_df.drop(['bin', 'bbl', 'building_id'], axis=1)
+        combine_df.drop(['bin', 'bbl', 'building_id'], axis=1, inplace=True)
     else:
         external_df= pd.read_csv('https://data.cityofnewyork.us/resource/myei-c3fa.csv')
-    return combine_df, train_df_index, test_set1_index, test_set2_index
+        combine_df = combine_df.merge(external_df, on='bbl', how='left')
+    return combine_df, train_df_index, test_set1_index, test_set2_index, test_set3_index
 
 
 def clean_data(dataset):
