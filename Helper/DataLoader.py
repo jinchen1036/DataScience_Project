@@ -28,6 +28,7 @@ def load_dataset(numeric=True, extra_dataset=False):
     if not extra_dataset:
         combine_df.drop(['bin', 'bbl', 'building_id'], axis=1, inplace=True)
     else:
+        # external dataset source need to be modify after our csv file generated
         external_df= pd.read_csv('https://data.cityofnewyork.us/resource/myei-c3fa.csv')
         combine_df = combine_df.merge(external_df, on='bbl', how='left')
     return combine_df, train_df_index, test_set1_index, test_set2_index, test_set3_index

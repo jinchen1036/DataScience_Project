@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 import numpy as np
 from sodapy import Socrata
@@ -34,18 +35,23 @@ def get_external_income_df():
                 all_external_df['df_%d' % i].drop([feature], axis=1, inplace=True)
             elif not feature.startswith('neighborhood'):
                 all_external_df['df_%d' % i][feature] = all_external_df['df_%d' % i][feature].astype(np.float64)
-            if '_' in feature:
+            if bool(re.search(r'\d', feature)):
                 cut_index = feature.rindex('_')
-                all_external_df['df_%d' % i][feature[:cut_index]] = all_external_df['df_%d' % i][feature]
-                all_external_df['df_%d' % i].drop([feature], axis=1, inplace=True)
+                all_external_df['df_%d' % i].rename(columns={feature: feature[:cut_index]}, inplace=True)
     combine_income_df = pd.concat([all_external_df['df_0'],all_external_df['df_1'],all_external_df['df_2'],all_external_df['df_3']])
     return combine_income_df
 
 
 
 combine_df = get_original_bbl()
+combine_df = combine_df.to_frame()
 combine_income_df = get_external_income_df()
-combine_df = combine_df.merge(combine_income_df,on='bbl',how='left')
-combine_df.to_csv("external_income.csv", header=True)
+unique_rent_bbl = combine_df.drop_duplicates('bbl')
+unique_income_bbl=combine_income_df.drop_duplicates('bbl')
+
+# combine_dfs = combine_df.merge(combine_income_df,on='bbl',how='left')
+# combine_df.to_csv("external_income.csv", header=True)
 
 
+
+new_df=pd.merge(unique_rent_bbl, unique_income_bbl, on='bbl', how='left')
