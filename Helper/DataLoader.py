@@ -9,8 +9,8 @@ pd.set_option('display.max_columns',10)
 def load_dataset(numeric=True, extra_dataset=False):
     '''
     :param numeric: if True will return only numeric columns
-    :param extra_dataset: if True then will return extract income information
-    :return:
+    :param extra_dataset: if True will return extract income information by zipcode
+    :return combined dataset(dataframe), train_df_index(series), test_set1_index(series), test_set3_index(series)
     '''
     train_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_train.csv', index_col=0)
     test_set1_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test1.csv', index_col=0)
@@ -37,6 +37,7 @@ def load_dataset(numeric=True, extra_dataset=False):
 
 def clean_data(dataset):
     '''
+    Clean the dataset, deal with missing value, outliers and wrong data.
     Data Analysis Result based on FeatureAnalysis
        bathrooms -> replace any value greater than 7 or equal to 0 with median
        size_sqft -> replace any value greater than 8000 or equal to 0 with median
@@ -44,6 +45,8 @@ def clean_data(dataset):
        min_to_subway -> replace any value greater than to 100 with median
        median_income_11249 -> 83,407
        fill_NA -> with median
+    :param dataset(dataframe): the dataset to be clean
+    :return clean dataset (dataframe)
     '''
 
     # Get all column with NAN and fill with median value
@@ -68,7 +71,10 @@ def clean_data(dataset):
 
 def normalized_dataset(dataset):
     '''
-        Normalize all columns, return columns with all type float64
+    Normalize all columns with scale 0 to 1, return columns with all type as float64
+    :param dataset(dataframe): the dataset to be normalize
+    :return normalized dataset (dataframe)
+
     '''
     for column in list(dataset.columns):
         if column == 'rent':  # not make any change to rent
