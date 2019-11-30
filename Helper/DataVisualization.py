@@ -4,7 +4,7 @@ def statistic_analysis(dataset):
     '''
     Estimating the unknown parameters (all columns in the dataset) influence to the rent in a linear regression model
     :param dataset: dataset to be analysis
-    :return: void function, will print the OLS analysis summary
+    :return: void function, will print the OLS analysis summarys
     '''
     fixed_set = dataset.dropna(axis=0)
     fixed_set = sm.add_constant(fixed_set)

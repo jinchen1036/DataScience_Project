@@ -1,10 +1,11 @@
+import csv
 import requests
 import pandas as pd
 
 
 def income_extractor(zip_code_list):
     incomes = []
-    income_dict = {}
+    income_dict = read_dict("zipcode_income.csv")
     i = 0
     for zip_code in zip_code_list:
         if zip_code in income_dict.keys():
@@ -29,11 +30,19 @@ def income_extractor(zip_code_list):
 def get_original_addr_zip():
     train_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_train.csv', index_col=0)
     test_set1_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test1.csv', index_col=0)
+    test_set2_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test2.csv', index_col=0)
     test_set3_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test3.csv', index_col=0)
-    combine_df = pd.concat([train_df['addr_zip'], test_set1_df['addr_zip'],test_set3_df['addr_zip']])
+    combine_df = pd.concat([train_df['addr_zip'], test_set1_df['addr_zip'],test_set2_df['addr_zip'],test_set3_df['addr_zip']])
     # del train_df,test_set1_df,test_set2_df, test_set3_df
     return combine_df.to_frame()
 
+def read_dict(filename):
+    reader = csv.reader(open(filename, 'r'))
+    dict = {}
+    for row in reader:
+        k, v = row
+        dict[k] = v
+    return dict
 def dict_to_csv(dict):
     with open('zipcode_income.csv', 'w') as f:
         for key in dict.keys():

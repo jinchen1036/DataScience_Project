@@ -15,14 +15,14 @@ def load_dataset(numeric=True, extra_dataset=False):
     '''
     train_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_train.csv', index_col=0)
     test_set1_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test1.csv', index_col=0)
-    # test_set2_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test2.csv', index_col=0)
+    test_set2_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test2.csv', index_col=0)
     test_set3_df = pd.read_csv('https://grantmlong.com/data/SE_rents2018_test3.csv', index_col=0)
 
     train_df_index = train_df.index
     test_set1_index = test_set1_df.index
-    # test_set2_index = test_set2_df.index
+    test_set2_index = test_set2_df.index
     test_set3_index = test_set3_df.index
-    combine_df = pd.concat([train_df,test_set1_df,test_set3_df])
+    combine_df = pd.concat([train_df,test_set1_df,test_set2_df,test_set3_df])
     combine_df['addr_zip'] = combine_df['addr_zip'].astype(np.int64)
 
     if numeric:
@@ -33,7 +33,7 @@ def load_dataset(numeric=True, extra_dataset=False):
         external_df= pd.read_csv('https://raw.githubusercontent.com/jinchen1036/DataScience_Project/master/ExternalDF/zipcode_income_withrentid.csv?token=AKASCZIDUHRZH2GD24ZKT4C55HFAU', index_col=0)
         combine_df['income'] = external_df.income
 
-    return combine_df, train_df_index, test_set1_index, test_set3_index
+    return combine_df, train_df_index, test_set1_index,test_set2_index, test_set3_index
 
 
 def clean_data(dataset):
@@ -90,8 +90,14 @@ def normalized_dataset(dataset):
         dataset[column] = (dataset[column] - min) / (max - min)
     return dataset
 
-# Transform object to numeric
+
 def transform_data(dataset):
+    '''
+    Convert 'addr_city','neighborhood','borough' from string the int
+    :param dataset(dataframe): the dataset to be process
+    :return processed dataset (dataframe)
+
+    '''
     le = LabelEncoder()
     process_columns = ['addr_city','neighborhood','borough']
     for column in process_columns:
@@ -99,6 +105,6 @@ def transform_data(dataset):
         dataset[column]=le.fit_transform(dataset[column])
     return dataset
 
-# combine_df, train_df_index, test_set1_index, test_set2_index = load_dataset(numeric=False, extra_dataset=True)
+# combine_df, train_df_index, test_set1_index, test_set2_index ,test_set3_index= load_dataset(numeric=False, extra_dataset=True)
 # combine_df = transform_data(combine_df)
 # combine_df = clean_data(combine_df)
