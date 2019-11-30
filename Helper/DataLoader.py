@@ -90,3 +90,16 @@ def normalized_dataset(dataset):
 
 # combine_df, train_df_index, test_set1_index, test_set2_index = load_dataset(numeric=True, extract_dataset=False)
 # combine_df = clean_data(combine_df)
+
+
+
+# Transform object to numeric
+def transform_data(dataset):
+    le = preprocessing.LabelEncoder()
+    for column in dataset.columns:
+        if column == 'rent':
+            continue
+        dataset[column].fillna("NA",inplace = True)
+        if column == 'addr_city'or column == 'neighborhood'or column =='borough':
+            dataset[column]=le.fit_transform(dataset[column])
+    return dataset
