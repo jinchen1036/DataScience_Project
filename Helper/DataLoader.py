@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 
 # When display in pycharm
 desired_width=320
@@ -51,6 +52,7 @@ def clean_data(dataset):
 
     # Get all column with NAN and fill with median value
     dataset.income.fillna(83407,inplace = True)
+    dataset = dataset.select_dtypes(include=[np.number])
     must_process_columns = ['bathrooms','size_sqft','year_built','min_to_subway']
     nan_columns = dataset.columns[dataset.isna().any()].tolist()
     nan_columns = list(set(nan_columns + must_process_columns))
@@ -88,18 +90,15 @@ def normalized_dataset(dataset):
         dataset[column] = (dataset[column] - min) / (max - min)
     return dataset
 
-# combine_df, train_df_index, test_set1_index, test_set2_index = load_dataset(numeric=True, extract_dataset=False)
-# combine_df = clean_data(combine_df)
-
-
-
 # Transform object to numeric
 def transform_data(dataset):
-    le = preprocessing.LabelEncoder()
-    for column in dataset.columns:
-        if column == 'rent':
-            continue
+    le = LabelEncoder()
+    process_columns = ['addr_city','neighborhood','borough']
+    for column in process_columns:
         dataset[column].fillna("NA",inplace = True)
-        if column == 'addr_city'or column == 'neighborhood'or column =='borough':
-            dataset[column]=le.fit_transform(dataset[column])
+        dataset[column]=le.fit_transform(dataset[column])
     return dataset
+
+# combine_df, train_df_index, test_set1_index, test_set2_index = load_dataset(numeric=False, extra_dataset=True)
+# combine_df = transform_data(combine_df)
+# combine_df = clean_data(combine_df)
