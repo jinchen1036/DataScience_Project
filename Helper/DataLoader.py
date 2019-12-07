@@ -1,11 +1,14 @@
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+import os
 
 # When display in pycharm
 desired_width=320
 pd.set_option('display.width', desired_width)
 pd.set_option('display.max_columns',10)
+
+
 
 def load_dataset(numeric=True, extra_dataset=False):
     '''
@@ -24,14 +27,15 @@ def load_dataset(numeric=True, extra_dataset=False):
     test_set3_index = test_set3_df.index
     combine_df = pd.concat([train_df,test_set1_df,test_set2_df,test_set3_df])
     combine_df['addr_zip'] = combine_df['addr_zip'].astype(np.int64)
-
+    
     if numeric:
         combine_df = combine_df.select_dtypes(include=[np.number])
     if not extra_dataset:
         combine_df.drop(['bin', 'bbl', 'building_id'], axis=1, inplace=True)
     else:
-        external_df= pd.read_csv('https://raw.githubusercontent.com/jinchen1036/DataScience_Project/master/ExternalDF/zipcode_income_withrentid.csv?token=AKASCZIDUHRZH2GD24ZKT4C55HFAU', index_col=0)
+        external_df= pd.read_csv('.\ExternalDF\zipcode_income_withrentid.csv', index_col=0)
         combine_df['income'] = external_df.income
+
 
     return combine_df, train_df_index, test_set1_index,test_set2_index, test_set3_index
 
@@ -51,6 +55,7 @@ def clean_data(dataset):
     '''
 
     # Get all column with NAN and fill with median value
+
     dataset.income.fillna(83407,inplace = True)
     dataset = dataset.select_dtypes(include=[np.number])
     must_process_columns = ['bathrooms','size_sqft','year_built','min_to_subway']
