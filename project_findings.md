@@ -55,7 +55,8 @@
     * As these problematic data are either `0` or exactly as `103343.6167`, one question that raised is that is the system automatic fill some data when some fields of the building record when it is missing, since both `size_sqft` and `bathroom` fields not missing any data.
      
   * Create at least one visualization that demonstrates the predictive power of your data.
-
+    - To be Added
+    
 #### 3. **Transformation and Modeling**
   * Describe 5-10 features you think play the biggest role in your model. 
     * How did you create these features?
@@ -73,7 +74,7 @@
     4. floornumber
         - We used the original data for the floornumber, as it's data seems reasonable. 
         - But it does have a impact in our model training, as most of house are between 0 to 8, but it is a great distribution of house in floor number above 8, which decision tree can do detail/better prediction from these house, as it can separate the feature better.
-    5. 
+    5. - To be Added
     * We see the different test loss which one of the features are missing, even random forest don't have stabilize loss because of its randomness, but we can still see the same difference by running the same model with same features multiple times and compare the mean.
     * Also these features on the OLS Regression Analysis all with p-value of 0, which again proof the usefulness of these features.
   * Describe how you are implementing your model. Why do you think this works well?
@@ -102,11 +103,27 @@
 
 #### 4. **Metrics, Validation, and Evaluation**
   * How well do you think you model will perform on the hold out test set? How do you know? 
+    - By analysis the loss of the test 1, we can get a rough idea of the model performance on test 2 and 3, as they are from same data source and not big period apart from each other. 
+    - We give out the comparision of median rent of train dataset with test 2 prediction dataset
+        - Gradient Boosting always have high loss in test dataset 1, but lowest in test dataset 2
+        - The model with lower test1 loss usually have higher test2 loss
+        - Also after submission of test 2 prediction, we conclude our thought which are compare median rent to predict rent is very unreliable, but looking at test 1 loss of the model is more reliable. 
   * Is your model useful? Why or why not?
+     - To be Added 
   * Are there any special cases in which your model works particularly well or particularly poorly? 
+     - To be Added
   * Create at least one visualization that demonstrates the predictive power of your model.
+    - To be Added
 
 #### 5. **Conclusion**
   * How would you use this model?
+     - To be Added
   * If you could have additional modeling features, what would they be? 
+     - Through analysis of our dataset, we can say that not all the data in the dataset are correct. Such as the outliers we remove from some of the features.
+     - Then if we can get a confidence level of the data correctness for each row/house, then we can identify some of the extreme case, which in most time is because of the wrong data it give. 
+     - Also, it will be make more sense if the model are train separately to get the range of rent rather than the actual rent, since there are always some deviation among the prediction and actual rent. However, we achieve better accuracy if provide the range of the rent, but the range should be within $100 difference not large scale. 
   * Would you rather have more data, or more features?
+     - No doubt - More DATA!
+     - More features are not always better, which can be proof that we only use 10 as our maximum features for each estimator in random forest, even when we actually have more features.
+     - More importantly, more data means the model can learn more generalize feature/characterize of the rent, which allow it to fit for various test dataset. 
+     - Another big issue is with increase number of features in trainning set, then will also require more features in test set, and in really life it is hard to accomplish. However, it will be easier to collect rough features but more data/samples.
