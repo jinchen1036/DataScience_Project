@@ -18,29 +18,29 @@
                     * Only match about 30% data with bbl, and as bbl are duplicated in both datasets so this match cannot be reliable 
                 * [Zip Codes and Stats](https://www.kaggle.com/jakerohrer/zip-codes-and-stats)
                     * Median Household Income [2006-2010], outdated data compare to the data we using. 
-                    * Bad idea using outdated data since it will misleading our model. 
+                    * Bad idea using outdated data since it will mislead our model. 
   * Does the inclusion of this additional data raise any ethical considerations?
     *   No, as the additional data is the median income based on zip code which actually come from Census data. We did not reveal any personal information. 
 
 #### 2. **Data Exploration**
   * What outliers present issues for your analysis? How have you chosen to handle them? Why?
-    * Outliers we found that seems like incorrect - [Reference](https://github.com/jinchen1036/DataScience_Project/blob/master/Practice_Analysis_Part1/FeatureAnalysis.ipynb)
+    * Outliers we found that seems to be incorrect - [Reference](https://github.com/jinchen1036/DataScience_Project/blob/master/Practice_Analysis_Part1/FeatureAnalysis.ipynb)
         1. bathroom
             * Most of bathroom number are between 1 to 5
             * 2 places with 12 bathrooms but with rent 2700 and 3200, 1 places with 20 bathrooms with rent 5000. Also 8 places with 0 bathroom
-            * Based on intuitive, these outliers are wrong data, as the rent are too long compare its bathroom number and should have place that are without bathroom.
+            * Based on intuitive, these outliers are wrong data, as the rents are too low considering their bathroom numbers and there shouldn't be places that are without bathroom.
         2. size_sqft
             * Most of size_sqft are between hundreds to 4000
-            * 3 places with size_sqft over 8500 with rent under 4000, by compare to the place with size_sqft around 6000 have rent over 20K, we can decide these 3 places have wrong size_sqft. 
+            * 3 places with size_sqft over 8500 with rent under 4000. Comparing to places with size_sqft of around 6000 that charge 20K, we can tell these 3 places have wrong size_sqft. 
         3. year_built
-            * Most of year_built are between 1800s to 2019
-            * 91 places with year_built as 0, without any comparision we know these are wrong.
+            * Most of year_built are between 1800 to 2019
+            * 91 places with year_built of 0, they must be missing values.
         4. min_to_subway
             * Most of min_to_subway are within 100
-            * 7 places with min_to_subway exactly as `103343.6167`, without investigation we know these are wrong data. Also by look into their zip code which are around Brooklyn with many subways around it, so again it is wrong data.
+            * 7 places with min_to_subway exactly as `103343.6167`. By looking into their zip codes, we found they locate in Brooklyn with many subway stations near by, these must be wrong data.
     * Handle Outliers
-        * We treat these outliers same way as missing data, since we consider these outliers are wrong so we have to replace it with new values.
-        * We use the median value of its associate column to replace its value.
+        * We treat these outliers the same way as missing data, since we consider these outliers wrong data so we will replace them with new values.
+        * We use the median value of that column to replace its value.
             
   * To what extent do missing values pose a challenge for your analysis? How have you chosen to handle them? Why?
     * Missing values always create some challenge since we cannot get the correct information about each building and have to replace it with other reasonable value. Even the replaced value is tend to be close to the actual value, but still is not exactly correct and will influence on the final result from the model. 
@@ -55,7 +55,7 @@
     * As these problematic data are either `0` or exactly as `103343.6167`, one question that raised is that is the system automatic fill some data when some fields of the building record when it is missing, since both `size_sqft` and `bathroom` fields not missing any data.
      
   * Create at least one visualization that demonstrates the predictive power of your data.
-    - To be Added
+    - To be added
     
 #### 3. **Transformation and Modeling**
   * Describe 5-10 features you think play the biggest role in your model. 
@@ -74,7 +74,9 @@
     4. floornumber
         - We used the original data for the floornumber, as it's data seems reasonable. 
         - But it does have a impact in our model training, as most of house are between 0 to 8, but it is a great distribution of house in floor number above 8, which decision tree can do detail/better prediction from these house, as it can separate the feature better.
-    5. - To be Added
+    5. size_sqrt
+        - We thought this might be the biggest factor since the price of a property is directly related to its area.
+        - We just used the original numbers from the dataset.
     * We see the different test loss which one of the features are missing, even random forest don't have stabilize loss because of its randomness, but we can still see the same difference by running the same model with same features multiple times and compare the mean.
     * Also these features on the OLS Regression Analysis all with p-value of 0, which again proof the usefulness of these features.
   * Describe how you are implementing your model. Why do you think this works well?
@@ -109,15 +111,16 @@
         - The model with lower test1 loss usually have higher test2 loss
         - Also after submission of test 2 prediction, we conclude our thought which are compare median rent to predict rent is very unreliable, but looking at test 1 loss of the model is more reliable. 
   * Is your model useful? Why or why not?
-     - To be Added 
+     - It is quite useful. For most of the apartments with common rents (not ridiculously luxury apartments), it performs pretty well.
   * Are there any special cases in which your model works particularly well or particularly poorly? 
-     - To be Added
+     - Within the price range of 2000 to 6000, this model has pretty good estimations. It's more accurate when the prices are lower, and doesn't perform as well when the prices are higher.
   * Create at least one visualization that demonstrates the predictive power of your model.
-    - To be Added
+    - See 'rf_predictions.png' in main directory.
 
 #### 5. **Conclusion**
   * How would you use this model?
-     - To be Added
+     - Listing sites could use this model to give landlords a suggestion rent for their apartments.
+     - People looking for apartments could use this to estimate whether an apartment is within a reasonable price range.
   * If you could have additional modeling features, what would they be? 
      - Through analysis of our dataset, we can say that not all the data in the dataset are correct. Such as the outliers we remove from some of the features.
      - Then if we can get a confidence level of the data correctness for each row/house, then we can identify some of the extreme case, which in most time is because of the wrong data it give. 
