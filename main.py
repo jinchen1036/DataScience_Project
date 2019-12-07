@@ -13,7 +13,7 @@ parameter = Parameters()
 modelProcessor = ModelProcessor()
 
 # Get Data
-combine_df, train_df_index, test_set1_index, test_set2_index = load_dataset(numeric=True, extract_dataset=False)
+combine_df, train_df_index, test_set1_index, test_set2_index = load_dataset(numeric=True, extra_dataset=False)
 combine_df = clean_data(combine_df)
 combine_df = normalized_dataset(combine_df)
 
