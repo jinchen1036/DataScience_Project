@@ -60,12 +60,51 @@
   * Describe 5-10 features you think play the biggest role in your model. 
     * How did you create these features?
     * How do you know these features are playing key roles?
+    1. Income - By zipcode
+        - From external source, get from web scrapping
+        - Based on the zipcode income, we can get a rough idea of how much people are willing or can pay for their rent, this will narrow down the prediction range of the rent.
+    2. Neighborhood 
+        - Convert the string to integer label, so can be used for model training
+        - Model can used that to group the house by neighborhood, and most likely the rent will be very similar within the same neighborhood, as neighborhood are small region than zipcode
+    3. bathrooms
+        - We remove the incorrect outliers and greatly decrease the range of the number of bathrooms
+        - Smaller range help the decision tree estimators separate the data, as without the big influence of large and wrong data
+        - As for rent, people are more likely to have more bathroom available as people are less likely to share the bathroom with ours, especially for the stranger roommates. Demand increase the pricing, also more construction are need for more bathroom. Thus, number of the bathroom become a key for determine the rent, and usually more bathroom means bigger place then cost more rent.
+    4. floornumber
+        - We used the original data for the floornumber, as it's data seems reasonable. 
+        - But it does have a impact in our model training, as most of house are between 0 to 8, but it is a great distribution of house in floor number above 8, which decision tree can do detail/better prediction from these house, as it can separate the feature better.
+    5. 
+    * We see the different test loss which one of the features are missing, even random forest don't have stabilize loss because of its randomness, but we can still see the same difference by running the same model with same features multiple times and compare the mean.
+    * Also these features on the OLS Regression Analysis all with p-value of 0, which again proof the usefulness of these features.
   * Describe how you are implementing your model. Why do you think this works well?
+    1. From GridSeachCV, we get our best hyperparameter for RandomForest as `max_features=10,n_estimators=320,bootstrap=True`
+        - The max_features is the highest number we tried nor the n_estimators, which proof that using more features/estimators are always better and simple model sometimes are better.
+        - Also with `bootstrap=True`, introduce more randomness to each estimator in the random forest, which allow the final prediction be more generalize fit for any type of data.
+    2. Key point of random forest is that each estimator is independent from each other, so even if some model don't do well, but majority of it still predict reasonable rent.
+    3. Another key point is we do a great job in feature extraction, which help model to analysis the best feature for rent prediction 
   * Describe your methodology for selecting your model. Why do you think this type of model works well?
+    1. Try various models for regression problem and find the best one. 
+       - Used GridSeachCV to find the best hyperparameters.
+       - List of models that we have tried are:
+            - LinearRegression
+            - KNeighborsRegressor
+            - DecisionTreeRegressor
+            - GradientBoostingRegressor
+            - AdaBoostRegressor (with based estimator as LinearRegression)
+            - RandomForestRegressor
+    2. Train the models with training dataset, and calculate the loss of both test set 1 and 2:
+        - Mainly focus on test 1 loss, as we don't know the really rent for test 2
+        - Find the model with smallest loss for test set 1
+    3. Random Forest is combine of many uncorrelated tree model to get the final prediction
+        - For a single decision tree model, we already get a loss of `2853766.8381` for test 1 (see [ModelTrainResult](https://github.com/jinchen1036/DataScience_Project/blob/master/Model_Result_Part1/ModelTrainResult2.ipynb))
+        - Using multiple uncorrelated models will outperform the individual model, as using these models produce ensemble predictions which are more accurate.
+        - Last, in compare to all other individual model performance, DecisionTreeRegressor is the best one, thus applying ensemble method with decision tree will be even better.
 
 #### 4. **Metrics, Validation, and Evaluation**
-  * How well do you think you model will perform on the hold out test set? How do you know? (b) Is your model useful? Why or why not?
-  * Are there any special cases in which your model works particularly well or particularly poorly? (d) Create at least one visualization that demonstrates the predictive power of your model.
+  * How well do you think you model will perform on the hold out test set? How do you know? 
+  * Is your model useful? Why or why not?
+  * Are there any special cases in which your model works particularly well or particularly poorly? 
+  * Create at least one visualization that demonstrates the predictive power of your model.
 
 #### 5. **Conclusion**
   * How would you use this model?
