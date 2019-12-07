@@ -59,6 +59,7 @@
 #### 3. **Transformation and Modeling**
   * Describe 5-10 features you think play the biggest role in your model. 
     * How did you create these features?
+    * The features that we are using are addr_city, neighborhood, and borough. We used a fillna method to make sure there is no null value in these three columns. Then we used a LabelEncoder method to change their datatype from object to numerical so they can use in model training. 
     * How do you know these features are playing key roles?
   * Describe how you are implementing your model. Why do you think this works well?
   * Describe your methodology for selecting your model. Why do you think this type of model works well?
