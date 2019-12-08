@@ -57,11 +57,11 @@
   * Create at least one visualization that demonstrates the predictive power of your data.
   ![vis_<2000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_lessthan2000.png?raw=true=400x300)
   ![vis_2000-3000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
-  ![vis_3000-4000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
-  ![vis_4000-5000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
-  ![vis_5000-6000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
-  ![vis_6000-10000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
-  ![vis_10000-50000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
+  ![vis_3000-4000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_3000between4000.png?raw=true)
+  ![vis_4000-5000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_4000between5000.png?raw=true)
+  ![vis_5000-6000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_5000between6000.png?raw=true)
+  ![vis_6000-10000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_6000between10000.png?raw=true)
+  ![vis_10000-50000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_10000between50000.png?raw=true)
     
 #### 3. **Transformation and Modeling**
   * Describe 5-10 features you think play the biggest role in your model. 
