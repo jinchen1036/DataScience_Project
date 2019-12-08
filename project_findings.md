@@ -122,7 +122,7 @@
   * Is your model useful? Why or why not?
      - It is quite useful to predict some common apartment rents. From the visualizations of the predictive power of our data, we can see that for most of the apartments with common rents range from $1500 to $4000 (not ridiculously luxury apartments), it performs pretty well that our predictive rents are pretty close to the actual rents. But for some cases, like some luxury apartments with rents range from $10000 to $50000, our predictions are not so good.
   * Are there any special cases in which your model works particularly well or particularly poorly? 
-     - Based on the visualizations of the predictive power, within the price range of $1500 to $4000, our model has pretty good estimations. It's more accurate when the prices are lower, and less accurate when the prices are higher.
+     - Based on the visualizations of the predictive power, within the price range of $1500 to $4000, our model has pretty good estimations. It's more accurate when the prices are lower, and less accurate when the prices are higher. The model works best in the rent range of $2000 to $3000, though not 100% correct but can generally get a sense of approximate rent of those apartments. The model works poorly in the rent range of $10000 to $50000 that many of our predictions are far off the actual rents.
   * Create at least one visualization that demonstrates the predictive power of your model.
     - [See 'rf_predictions.png' in main directory](https://raw.githubusercontent.com/jinchen1036/DataScience_Project/master/rf_predictions.png?token=AJXDIGHAKAJJA6CTSMW3ODS56WVRK)
 
