@@ -4,7 +4,7 @@ from sklearn.metrics import mean_squared_error
 
 
 class ModelProcessor:
-
+    
     def train_model(self, classifier, parameters,feature_columns, train_df, test_df, grid = False, train_target='rent',cv_split = 6, trainWithTest1 = True, test2_df=None):
         '''
         :param classifier: Model to be used to predict
