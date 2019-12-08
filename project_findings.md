@@ -60,6 +60,9 @@
 #### 3. **Transformation and Modeling**
   * Describe 5-10 features you think play the biggest role in your model. 
     * How did you create these features?
+       * Pick three object feature to use -  addr_city, neighborhood, and borough.
+       * Method: We used a fillna method to make sure there is no null value in these three columns. Then we used a LabelEncoder method to change their datatype from object to numerical so they can use in model training. 
+    
     * How do you know these features are playing key roles?
     1. Income - By zipcode
         - From external source, get from web scrapping
@@ -130,3 +133,4 @@
      - More features are not always better, which can be proof that we only use 10 as our maximum features for each estimator in random forest, even when we actually have more features.
      - More importantly, more data means the model can learn more generalize feature/characterize of the rent, which allow it to fit for various test dataset. 
      - Another big issue is with increase number of features in trainning set, then will also require more features in test set, and in really life it is hard to accomplish. However, it will be easier to collect rough features but more data/samples.
+
