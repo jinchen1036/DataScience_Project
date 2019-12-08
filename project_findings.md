@@ -6,7 +6,7 @@
 #### 1. **Data Usage**
   * What outside data have you appended to the original data set? Why did you choose this data? 
     *  Outside data come from [incomebyzipcode.com](https://www.incomebyzipcode.com/newyork) through web scraping. 
-        * [Extract Data](https://raw.githubusercontent.com/jinchen1036/DataScience_Project/master/ExternalDF/zipcode_income_withrentid.csv?token=AKASCZIDUHRZH2GD24ZKT4C55HFAU)
+        * [Extra Data](https://raw.githubusercontent.com/jinchen1036/DataScience_Project/master/ExternalDF/zipcode_income_withrentid.csv?token=AKASCZIDUHRZH2GD24ZKT4C55HFAU)
     *  Reason to Choose this data
         * We believe the income of the region can says a lot about the rent with below assumptions
             1. Rent should be in similar scale among the same region 
@@ -55,7 +55,13 @@
     * As these problematic data are either `0` or exactly as `103343.6167`, one question that raised is that is the system automatic fill some data when some fields of the building record when it is missing, since both `size_sqft` and `bathroom` fields not missing any data.
      
   * Create at least one visualization that demonstrates the predictive power of your data.
-    - To be added
+  ![vis_<2000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_lessthan2000.png?raw=true=400x300)
+  ![vis_2000-3000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
+  ![vis_3000-4000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
+  ![vis_4000-5000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
+  ![vis_5000-6000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
+  ![vis_6000-10000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
+  ![vis_10000-50000](https://github.com/jinchen1036/DataScience_Project/blob/master/Visualization/RF_Prediction_rent_2000between3000.png?raw=true)
     
 #### 3. **Transformation and Modeling**
   * Describe 5-10 features you think play the biggest role in your model. 
@@ -118,7 +124,7 @@
   * Are there any special cases in which your model works particularly well or particularly poorly? 
      - Within the price range of 2000 to 6000, this model has pretty good estimations. It's more accurate when the prices are lower, and doesn't perform as well when the prices are higher.
   * Create at least one visualization that demonstrates the predictive power of your model.
-    - See 'rf_predictions.png' in main directory.
+    - [See 'rf_predictions.png' in main directory](https://raw.githubusercontent.com/jinchen1036/DataScience_Project/master/rf_predictions.png?token=AJXDIGHAKAJJA6CTSMW3ODS56WVRK)
 
 #### 5. **Conclusion**
   * How would you use this model?
