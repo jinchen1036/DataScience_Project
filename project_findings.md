@@ -120,9 +120,9 @@
         - The model with lower test1 loss usually have higher test2 loss
         - Also after submission of test 2 prediction, we conclude our thought which are compare median rent to predict rent is very unreliable, but looking at test 1 loss of the model is more reliable. 
   * Is your model useful? Why or why not?
-     - It is quite useful. For most of the apartments with common rents (not ridiculously luxury apartments), it performs pretty well.
+     - It is quite useful to predict some common apartment rents. From the visualizations of the predictive power of our data, we can see that for most of the apartments with common rents range from $1500 to $4000 (not ridiculously luxury apartments), it performs pretty well that our predictive rents are pretty close to the actual rents. But for some cases, like some luxury apartments with rents range from $10000 to $50000, our predictions are not so good.
   * Are there any special cases in which your model works particularly well or particularly poorly? 
-     - Within the price range of 2000 to 6000, this model has pretty good estimations. It's more accurate when the prices are lower, and doesn't perform as well when the prices are higher.
+     - Based on the visualizations of the predictive power, within the price range of $1500 to $4000, our model has pretty good estimations. It's more accurate when the prices are lower, and less accurate when the prices are higher.
   * Create at least one visualization that demonstrates the predictive power of your model.
     - [See 'rf_predictions.png' in main directory](https://raw.githubusercontent.com/jinchen1036/DataScience_Project/master/rf_predictions.png?token=AJXDIGHAKAJJA6CTSMW3ODS56WVRK)
 
